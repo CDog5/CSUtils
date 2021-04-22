@@ -7,13 +7,15 @@ def fibonacci(start_no,length):
        n1 = n2
        n2 = nth
     return sequence
-def is_prime(num):
-    if num == 1:
-        return False
-    for i in range(2,num):
-       if (num % i) == 0:
-           return False
+def is_prime(n):
+    if n==2 or n==3: return True
+    if n%2==0 or n<2: return False
+    for i in range(3, int(n**0.5)+1, 2):   # only odd numbers
+        if n%i==0:
+            return False    
+
     return True
+
 def factorial(num):
     count = num-1
     while count > 1:

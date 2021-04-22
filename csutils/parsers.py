@@ -1,3 +1,4 @@
+import json, pickle
 class UrlPage:
     def __init__(self,url):
         self.url = url
@@ -36,3 +37,16 @@ class UrlParser:
         self.pages = self.make_pages(tmp[1:])
         self.urllist.extend([self.method,self.domain.url,*[x.url for x in self.pages]])
         return (self.method,self.domain,self.pages)
+class FileParser:
+    def __init__(self,filepath):
+        self.fp = filepath
+        self.contents = self.load_contents()
+        if self.fp.endswith('.json'):
+            self.parsed =  json.loads(self.contents)
+        elif self.fp.endswith('.p'):
+            self.parsed = pickle.load( open( self.fp, "rb" ) )
+        else:
+            self.parsed = self.contents
+    def load_contents(self):
+        with open(self.fp,'r') as f:
+            return f.read()          
